@@ -14,6 +14,7 @@ commands:
             aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.workflow_id >>
 
+
 jobs:
   build-frontend:
     docker:
@@ -149,6 +150,36 @@ jobs:
       # Here's where you will add some code to rollback on failure 
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+
+  configure-infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      # Add ssh keys with fingerprint
+      - add_ssh_keys:
+          fingerprints: ["88:25:74:27:46:2e:35:2e:1f:ba:3c:06:54:28:20:3d"]
+      # attach workspace
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Install dependencies
+          command: |
+            apk add curl
+            apk add --upgrade bash
+            apk add --update ansible
+            apk add openssh-client
+            pip3 install awscli
+      - run:
+          name: Configure server
+          command: |
+            cat ~/project/.circleci/ansible/inventory.txt
+            export ANSIBLE_HOST_KEY_CHECKING=False
+            ansible-playbook -i ~/project/.circleci/ansible/inventory.txt ~/project/.circleci/ansible/configure-server.yml
+      # Here's where you will add some code to rollback on failure
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+
 workflows:
   default:
     jobs:
@@ -167,3 +198,5 @@ workflows:
           filters:
             branches:
              only: [testmode]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
