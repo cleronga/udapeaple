@@ -13,7 +13,7 @@ commands:
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.workflow_id >>
             aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.workflow_id >>
-  evert-migrations:
+  revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
       workflow_id:
@@ -247,3 +247,5 @@ workflows:
              only: [testmode]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
