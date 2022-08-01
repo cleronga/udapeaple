@@ -397,7 +397,7 @@ jobs:
            workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       - revert-migrations:
            workflow_id: ${CIRCLE_WORKFLOW_ID:0:7} 
-cleanup:
+  cleanup:
     docker:
        - image: amazon/aws-cli
     steps:
@@ -417,6 +417,7 @@ cleanup:
                echo Stack names: "${STACKS[@]}"
 
             export OldWorkflowID="the id here"
+           
             export STACKS=[] #put the list of stacks here
       - run:
           name: Remove old stacks and files
@@ -428,7 +429,6 @@ cleanup:
    
 workflows:
   default:
-    jobs:
-      
+    jobs:      
       - cleanup
           #requires: [cloudfront-update]
