@@ -418,10 +418,6 @@ jobs:
             echo Stack names: "${STACKS[@]}"
             export OldWorkflowID="the id here"
             export STACKS=[] #put the list of stacks here
-      - run:
-          name: Remove old stacks and files
-          command: |
-            echo old ni ${OldWorkflowID}
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
@@ -431,6 +427,8 @@ jobs:
               else
               echo "there is no oldstack"
             fi
+      
+            
 workflows:
   default:
     jobs:    
