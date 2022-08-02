@@ -418,45 +418,20 @@ jobs:
             export OldWorkflowID="the id here"
             export STACKS=[] #put the list of stacks here
             echo "$STACK"
-            if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
-            then
-            aws cloudformation delete-stack --stack-name udapeople-backend-$OldWorkflowID
-            aws s3 rm s3://udapeople-$OldWorkflowID --recursive
-            aws cloudformation delete-stack --stack-name udapeople-frontend-$OldWorkflowID
-            else
-            echo "no oldstak found"
-            fi
+            echo "$STACK[@]"
+            echo "$OldWorkflowID"
+            #if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
+            #then
+            #aws cloudformation delete-stack --stack-name udapeople-backend-$OldWorkflowID
+            #aws s3 rm s3://udapeople-$OldWorkflowID --recursive
+            #aws cloudformation delete-stack --stack-name udapeople-frontend-$OldWorkflowID
+            #else
+            #echo "no oldstak found"
+            #fi
       
    
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-             only: [testmode]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
-      - deploy-frontend:
-          requires: [run-migrations]
-      - deploy-backend:
-          requires: [run-migrations]
-      - smoke-test:
-          requires: [deploy-backend, deploy-frontend]
-      - cloudfront-update:
-          requires: [smoke-test]
-      - cleanup:
-          requires: [cloudfront-update]
+      
+      - cleanup
