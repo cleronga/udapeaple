@@ -104,7 +104,7 @@ export class ConfigService {
       password: this.envConfig.TYPEORM_PASSWORD,
       database: this.envConfig.TYPEORM_DATABASE,
       //entities: [this.envConfig.TYPEORM_ENTITIES],
-      entities: [Product, Order, Employee],
+       entities: [Product, Order, Employee],
       logging: this.envConfig.TYPEORM_LOGGING === 'true',
       extra: { max: 4, min: 1 },
       synchronize: false,

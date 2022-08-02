@@ -63,8 +63,6 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm install node
-            npm install node-typescript
             npm install
             npm run build
       - save_cache:
@@ -99,8 +97,6 @@ jobs:
           name: Testing frontend
           command: |
             cd frontend
-            npm install node
-            npm install node-typescript
             npm install
             npm run test 
 
@@ -270,7 +266,7 @@ jobs:
       - run:
           name: Deploy frontend objects
           command: |
-            cd frontend            
+            cd frontend
             npm install
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
@@ -400,7 +396,7 @@ jobs:
       - destroy-environment:
            workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       - revert-migrations:
-           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+           
 workflows:
   default:
     jobs:
