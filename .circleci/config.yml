@@ -417,6 +417,7 @@ jobs:
             --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
             echo Stack names: "${STACKS[@]}"       
              if [[${OldWorkflowID} ==""]]
+             then
              echo "no oldStack found"
              else 
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
