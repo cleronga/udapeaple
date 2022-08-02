@@ -401,7 +401,8 @@ jobs:
     docker:
       - image: cimg/base:2021.04
     steps:
-      - checkout      
+      - checkout  
+      - dependencies    
       - run:
           name: Get old stack workflow id
           command: |
