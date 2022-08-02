@@ -417,7 +417,7 @@ jobs:
                echo Stack names: "${STACKS[@]}"
             export OldWorkflowID="the id here"
             export STACKS=[] #put the list of stacks here
-            echo "${STACK[]}"
+            echo "${STACK}"
             echo "${STACK[@]}"
             echo "${OldWorkflowID}"
             #if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
