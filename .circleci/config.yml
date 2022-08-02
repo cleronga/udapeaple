@@ -99,6 +99,8 @@ jobs:
           name: Testing frontend
           command: |
             cd frontend
+            npm install node
+            npm install node-typescript
             npm install
             npm run test 
 
