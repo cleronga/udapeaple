@@ -3,7 +3,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AboutInfo } from './about.interface';
 import { Product } from '../../modules/domain/orders/entities/product.entity';
 import { Order } from '../../modules/domain/orders/entities/order.entity';
-import { Employee } from '../domain/employees/entities/employee.entity';
+import { Employee } from '../../modules/domain/employees/entities/employee.entity';
 
 export interface EnvConfig {
   VERSION: string;
