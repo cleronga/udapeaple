@@ -218,11 +218,11 @@ jobs:
   run-migrations:
     docker:
       - image: cimg/node:13.8.0
-    steps:
+    steps:      
       - checkout
+      - awscli
       - restore_cache:
-          keys:
-            - build-backend
+           keys: [backend-scan]
       - run:
           name: Run migrations
           command: |
