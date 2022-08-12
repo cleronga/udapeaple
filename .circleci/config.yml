@@ -236,8 +236,7 @@ jobs:
           command: |
             cd backend
             npm install
-            npm install typeorm pg --save
-            npm audit fix --audit-level=critical --force            
+            npm install typeorm pg --save           
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
