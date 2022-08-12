@@ -236,6 +236,7 @@ jobs:
           command: |
             cd backend
             npm install
+            npm run build
             npm run migrations > migrations_dump.txt
             echo "has been executed successfully." >> migrations_dump.txt
             cat migrations_dump.txt
