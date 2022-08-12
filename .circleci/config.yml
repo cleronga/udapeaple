@@ -221,13 +221,15 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys:
-            - build-backend
+          keys: [backend-scan]
       - run:
           name: Run migrations
           command: |
             cd backend
             npm install
+            npm install -g typescript
+            tsc --version
+            npm init
             npm install typeorm pg --save
             # Run and save the migration output
             npm run migrations > migrations_dump.txt
