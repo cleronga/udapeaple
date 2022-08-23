@@ -235,7 +235,8 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm install -g npm          
+            npm install
+            npm install typeorm pg --save           
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
